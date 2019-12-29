@@ -14,8 +14,7 @@ namespace yapdd.api.Services
             try
             {
                 return await new PddApi(
-                        pddBase.PddToken,
-                        pddBase.OAuthToken
+                        pddBase.PddToken
                     )
                     .Domain(pddBase.Domain).Mail.List(page, onPage);
             }
@@ -31,8 +30,7 @@ namespace yapdd.api.Services
             try
             {
                 return await new PddApi(
-                        mail.PddToken,
-                        mail.OAuthToken
+                        mail.PddToken
                     )
                     .Domain(mail.Domain).Mail.Add(mail.Login, mail.Password);
             }
@@ -48,8 +46,7 @@ namespace yapdd.api.Services
             try
             {
                 return await new PddApi(
-                        pddBase.PddToken,
-                        pddBase.OAuthToken
+                        pddBase.PddToken
                     )
                     .Domain(pddBase.Domain).Mail.Edit(emailAccountBase);
             }
@@ -65,8 +62,7 @@ namespace yapdd.api.Services
             try
             {
                 return await new PddApi(
-                        pddBase.PddToken,
-                        pddBase.OAuthToken
+                        pddBase.PddToken
                     )
                     .Domain(pddBase.Domain).Mail.Counters(uid);
             }
@@ -82,8 +78,7 @@ namespace yapdd.api.Services
             try
             {
                 return await new PddApi(
-                        pddBase.PddToken,
-                        pddBase.OAuthToken
+                        pddBase.PddToken
                     )
                     .Domain(pddBase.Domain).Mail.Delete(uid);
             }

@@ -1,5 +1,11 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +15,8 @@ using yapdd.api.Services.Contracts;
 
 namespace yapdd.api
 {
+
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -18,16 +26,50 @@ namespace yapdd.api
 
         public IConfiguration Configuration { get; }
 
+        private class ApiExplorerGroupPerVersionConvention : IControllerModelConvention
+        {
+            public void Apply(ControllerModel controller)
+            {
+                var controllerNamespace = controller.ControllerType.Namespace; // e.g. "Controllers.v1"
+                var apiVersion = controllerNamespace?.Split('.').Last().ToLower();
+
+                controller.ApiExplorer.GroupName = apiVersion;
+            }
+        }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddScoped<IMailService, MailService>();
+            services.AddMvc(c =>
+                c.Conventions.Add(
+                    new ApiExplorerGroupPerVersionConvention())); // decorate Controllers to distinguish SwaggerDoc (v1, v2, etc.)
 
+            services.AddApiVersioning();
+            services.AddApiVersioning(o =>
+            {
+                o.AssumeDefaultVersionWhenUnspecified = true;
+                o.DefaultApiVersion = new ApiVersion(1, 0);
+            });
+
+            services.AddControllers();
+            
+            
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "YaPdd", Version = "v1" });
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.FirstOrDefault());
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "YaPdd", Version = "v1", Contact = new OpenApiContact { Name = "Nurzhan Aitbayev", Url = new Uri("https://github.com/nurzhanme")}});
+                options.SwaggerDoc("v2", new OpenApiInfo { Title = "YaPdd", Version = "v2", Contact = new OpenApiContact { Name = "Nurzhan Aitbayev", Url = new Uri("https://github.com/nurzhanme") } });
+               
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
+                options.CustomSchemaIds(x => x.FullName);
             });
+
+            services.AddScoped<IMailService, MailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +84,9 @@ namespace yapdd.api
             app.UseSwaggerUI(c =>
             {
                 c.RoutePrefix = "";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "YaPdd V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", $"v1");
+                c.SwaggerEndpoint("/swagger/v2/swagger.json", $"v2");
+            
             });
 
             app.UseHttpsRedirection();

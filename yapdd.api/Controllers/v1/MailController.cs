@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using kasthack.yandex.pdd.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using yapdd.api.Models;
 using yapdd.api.Models.DTOs;
 using yapdd.api.Services.Contracts;
 
-namespace yapdd.api.Controllers
+namespace yapdd.api.Controllers.v1
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class MailController : ControllerBase
     {
@@ -23,14 +20,14 @@ namespace yapdd.api.Controllers
         }
 
         // GET: api/Mail/List
-        [HttpGet(Name = "List")]
+        [HttpGet("List", Name = "List")]
         public async Task<ListEmailResponse> List(string domain, string pddToken, string oauthToken, int? page = null, int? onPage = null)
         {
             return await _mailService.List(new PddBase { Domain = domain, PddToken = pddToken, OAuthToken = oauthToken }, page, onPage);
         }
 
         // GET: api/Mail/Counters/
-        [HttpGet(Name = "Counters")]
+        [HttpGet("Counters", Name = "Counters")]
         public async Task<EmailCountersResponse> Counters(string domain, string pddToken, string oauthToken, long id)
         {
             return await _mailService.Counters(
@@ -38,7 +35,7 @@ namespace yapdd.api.Controllers
         }
 
         // POST: api/Mail/Add
-        [HttpPost(Name = "Add")]
+        [HttpPost("Add", Name = "Add")]
         public async Task<AddEmailResponse> Add([FromBody] Mail mail)
         {
             return await _mailService.Add(mail);
@@ -52,7 +49,7 @@ namespace yapdd.api.Controllers
         }
 
         // DELETE: api/Mail/Delete
-        [HttpDelete(Name = "Delete")]
+        [HttpDelete("Delete", Name = "Delete")]
         public async Task<DeleteEmailResponse> Delete(string domain, string pddToken, string oauthToken, long id)
         {
             return await _mailService.Delete(
