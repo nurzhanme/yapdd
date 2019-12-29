@@ -1,5 +1,7 @@
 bin\
 obj\
+Dockerfile*
+docker-compose*
 .dockerignore
 .git
 .gitignore
