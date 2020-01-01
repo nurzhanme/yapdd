@@ -1,6 +1,6 @@
 ﻿using kasthack.yandex.pdd.Entities;
 
-namespace yapdd.api.Models.DTOs
+namespace yapdd.Models.DTOs
 {
     public class EditMailDto
     {

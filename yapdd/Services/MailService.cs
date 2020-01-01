@@ -1,11 +1,11 @@
-﻿using kasthack.yandex.pdd;
-using kasthack.yandex.pdd.Entities;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using yapdd.api.Models;
-using yapdd.api.Services.Contracts;
+using kasthack.yandex.pdd;
+using kasthack.yandex.pdd.Entities;
+using yapdd.Models;
+using yapdd.Services.Contracts;
 
-namespace yapdd.api.Services
+namespace yapdd.Services
 {
     public class MailService : IMailService
     {

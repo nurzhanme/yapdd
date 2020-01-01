@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using yapdd.api.Models;
-using yapdd.api.Models.DTOs;
-using yapdd.api.Services.Contracts;
+using yapdd.Models;
+using yapdd.Services.Contracts;
 
-namespace yapdd.api.Controllers.v2
+namespace yapdd.Controllers.v2
 {
     [ApiVersion("2")]
     [Route("api/v{version:apiVersion}/[controller]")]

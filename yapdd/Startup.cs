@@ -10,10 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using yapdd.api.Services;
-using yapdd.api.Services.Contracts;
+using yapdd.Services;
+using yapdd.Services.Contracts;
 
-namespace yapdd.api
+namespace yapdd
 {
 
 

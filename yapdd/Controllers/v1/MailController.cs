@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using kasthack.yandex.pdd.Entities;
 using Microsoft.AspNetCore.Mvc;
-using yapdd.api.Models;
-using yapdd.api.Models.DTOs;
-using yapdd.api.Services.Contracts;
+using yapdd.Models;
+using yapdd.Models.DTOs;
+using yapdd.Services.Contracts;
 
-namespace yapdd.api.Controllers.v1
+namespace yapdd.Controllers.v1
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]

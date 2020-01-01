@@ -4,6 +4,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	<NoWarn>$(NoWarn);1591</NoWarn>
+	<AssemblyName>yapdd</AssemblyName>
+	<RootNamespace>yapdd</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

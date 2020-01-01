@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using kasthack.yandex.pdd.Entities;
-using yapdd.api.Models;
+using yapdd.Models;
 
-namespace yapdd.api.Services.Contracts
+namespace yapdd.Services.Contracts
 {
     public interface IMailService
     {

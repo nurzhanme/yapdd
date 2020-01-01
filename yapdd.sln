@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yapdd.api", "yapdd.api\yapdd.api.csproj", "{D0F47F5C-3A79-4D17-BDBD-B6510D1356D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yapdd", "yapdd\yapdd.csproj", "{D0F47F5C-3A79-4D17-BDBD-B6510D1356D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
