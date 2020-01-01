@@ -4,15 +4,15 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
-COPY ["yapdd.csproj", "./"]
-RUN dotnet restore "./yapdd.csproj"
+COPY ["yapdd.api.csproj", "./"]
+RUN dotnet restore "./yapdd.api.csproj"
 COPY . .
-RUN dotnet build "./yapdd.csproj" -c Release -o /app
+RUN dotnet build "./yapdd.api.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "./yapdd.csproj" -c Release -o /app
+RUN dotnet publish "./yapdd.api.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "yapdd.dll"]
+ENTRYPOINT ["dotnet", "yapdd.api.dll"]
